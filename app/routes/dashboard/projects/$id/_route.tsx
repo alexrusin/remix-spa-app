@@ -1,11 +1,7 @@
-import {
-  type ClientLoaderFunctionArgs,
-  Link,
-  useLoaderData,
-  json,
-} from "@remix-run/react";
+import { json, type LoaderFunctionArgs } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 
-export async function clientLoader({ params }: ClientLoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   return json({ project_id: params.id });
 }
 
@@ -25,7 +21,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function Project() {
-  const { project_id } = useLoaderData<typeof clientLoader>();
+  const { project_id } = useLoaderData<typeof loader>();
   return (
     <div className="lg:flex lg:items-center lg:justify-between">
       <div className="min-w-0 flex-1">
