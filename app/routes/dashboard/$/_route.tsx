@@ -1,7 +1,11 @@
-import { Link, useLoaderData } from "@remix-run/react";
-import { json, type LoaderFunctionArgs } from "@remix-run/node";
+import {
+  type ClientLoaderFunctionArgs,
+  Link,
+  useLoaderData,
+  json,
+} from "@remix-run/react";
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function clientLoader({ params }: ClientLoaderFunctionArgs) {
   const filePath = params["*"];
   return json({
     filePath,
@@ -9,7 +13,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 }
 
 export default function Dashboard404() {
-  const { filePath } = useLoaderData<typeof loader>();
+  const { filePath } = useLoaderData<typeof clientLoader>();
   return (
     <>
       <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
